@@ -1,4 +1,5 @@
 import axios from 'axios';
+import swAlert from '@sweetalert/with-react'
 
 function Login(){
 
@@ -13,23 +14,22 @@ function Login(){
         console.log(regexEmail.test(email));
 
         if(email === '' || password === ''){
-            console.log("Los campos no se pueden enviar vacios");
+            swAlert(<h2>Los campos no se pueden enviar vacios</h2>);
             return;
         }
 
         if(email !== '' && !regexEmail.test(email)){
-            console.log("Debes ingresar una direccion de email valida");
+            swAlert(<h2>Debes ingresar una direccion de email valida</h2>);
             return;
         }
 
         if(email !== 'challenge@alkemy.org' || password !== 'react'){
-            console.log("Credenciales invalidas");
+            swAlert(<h2>Credenciales invalidas</h2>);
             return;
         }
 
-        console.log("Ok, estamos listos para enviar la informacion");
-
         axios.post('http://challenge-react.alkemy.org', {email, password}).then(response => {
+            swAlert(<h2>Perfecto, ingresaste correctamente</h2>)
                 console.log(response.data);
             })
     }
